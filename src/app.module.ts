@@ -7,7 +7,6 @@ import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin
 import { ApolloServerPluginLandingPageDisabled } from '@apollo/server/plugin/disabled';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { UserModule } from './user/user.module';
-import { User } from './user/entities/user.entity';
 
 @Module({
   imports: [
@@ -28,7 +27,7 @@ import { User } from './user/entities/user.entity';
         synchronize: true,
         migrationsRun: true,
         migrationsTableName: 'migrations',
-        logger: 'file',
+        // logger: 'file',
         charset: 'utf8mb4',
         autoLoadEntities: true,
       }),

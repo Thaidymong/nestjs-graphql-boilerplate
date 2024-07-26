@@ -3,15 +3,15 @@ import { BaseEntity } from "src/common/entities/base.entity";
 import { Column, Entity } from "typeorm";
 
 @ObjectType()
-@Entity('users')
-export class User extends BaseEntity {
+@Entity('user')
+export class UserEntity extends BaseEntity {
   @Column()
   @Field()
-  firstName: string;
+  first_name: string;
 
   @Column()
   @Field()
-  lastName: string;
+  last_name: string;
 
   @Column()
   @Field()
