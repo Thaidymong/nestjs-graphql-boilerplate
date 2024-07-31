@@ -10,16 +10,35 @@ type UserResponse {
   password: String!
 }
 
+type AllUserResponse {
+  data: [UserResponse!]
+}
+
 type CreateUserResponse {
   data: UserResponse
 }
 
+type LoginResponse {
+  accessToken: String
+  refreshToken: String
+}
+
+type RefreshTokenResponse {
+  accessToken: String
+  refreshToken: String
+}
+
 type Query {
-  getUser: String!
+  getAllUsers: AllUserResponse!
+  userByID(id: String!): CreateUserResponse!
+  userByEmail(email: String!): CreateUserResponse!
+  me: CreateUserResponse!
 }
 
 type Mutation {
   create(input: CreateUserDto!): CreateUserResponse!
+  login(input: LoginDto!): LoginResponse!
+  refreshToken(input: RefreshTokenDto!): RefreshTokenResponse!
 }
 
 input CreateUserDto {
@@ -27,4 +46,13 @@ input CreateUserDto {
   last_name: String!
   email: String!
   password: String!
+}
+
+input LoginDto {
+  email: String!
+  password: String!
+}
+
+input RefreshTokenDto {
+  refreshToken: String!
 }
