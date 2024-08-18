@@ -32,7 +32,7 @@ type Query {
   getAllUsers: AllUserResponse!
   userByID(id: String!): CreateUserResponse!
   userByEmail(email: String!): CreateUserResponse!
-  me: CreateUserResponse!
+  me: UserResponse!
 }
 
 type Mutation {
