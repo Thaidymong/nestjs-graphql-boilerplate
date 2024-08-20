@@ -6,7 +6,7 @@ import {
 } from '../dto/response/login.response';
 import { LoginDto } from '../dto/input/login.input';
 import { Public } from '../decorators/public.decorator';
-import { CreateUserResponse, UserResponse } from 'src/user/dto/response';
+import { UserResponse } from 'src/user/dto/response';
 import { JwtAuthGuard } from '../guard/jwt-auth.guard';
 import { UseGuards } from '@nestjs/common';
 import { CurrentUser } from '../decorators';

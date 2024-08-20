@@ -11,22 +11,22 @@ import { UserRepository } from 'src/user/repositoties/user.repositoty';
 import { JwtAuthGuard } from './guard/jwt-auth.guard';
 
 @Module({
-    imports: [
-        TypeOrmModule.forFeature([UserEntity]),
-        JwtModule.register({
-            global: true,
-        }),
-    ],
-    providers: [
-        AuthService,
-        AuthResolver,
-        UserService,
-        UserRepository,
-        ConfigService,
-        {
-            provide: APP_GUARD,
-            useClass: JwtAuthGuard,
-        },
-    ],
+  imports: [
+    TypeOrmModule.forFeature([UserEntity]),
+    JwtModule.register({
+      global: true,
+    }),
+  ],
+  providers: [
+    AuthService,
+    AuthResolver,
+    UserService,
+    UserRepository,
+    ConfigService,
+    {
+      provide: APP_GUARD,
+      useClass: JwtAuthGuard,
+    },
+  ],
 })
-export class AuthModule { }
+export class AuthModule {}

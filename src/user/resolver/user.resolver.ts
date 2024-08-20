@@ -6,28 +6,28 @@ import { Public } from 'src/auth/decorators';
 
 @Resolver()
 export class UserResolver {
-    constructor(
-        private readonly userService: UserService,
-    ) { }
+  constructor(private readonly userService: UserService) {}
 
-    @Public()
-    @Mutation(() => CreateUserResponse)
-    async create(@Args('input') input: CreateUserDto): Promise<CreateUserResponse> {
-        return await this.userService.create(input);
-    }
+  @Public()
+  @Mutation(() => CreateUserResponse)
+  async create(
+    @Args('input') input: CreateUserDto,
+  ): Promise<CreateUserResponse> {
+    return await this.userService.create(input);
+  }
 
-    @Query(() => AllUserResponse)
-    async getAllUsers(): Promise<AllUserResponse> {
-        return await this.userService.findAll();
-    }
+  @Query(() => AllUserResponse)
+  async getAllUsers(): Promise<AllUserResponse> {
+    return await this.userService.findAll();
+  }
 
-    @Query(() => CreateUserResponse)
-    async userByID(@Args('id', { type: () => String }) id: string) {
-        return this.userService.findUserById(id);
-    }
+  @Query(() => CreateUserResponse)
+  async userByID(@Args('id', { type: () => String }) id: string) {
+    return this.userService.findUserById(id);
+  }
 
-    @Query(() => CreateUserResponse)
-    async userByEmail(@Args('email', { type: () => String }) email: string) {
-        return await this.userService.findUserByEmail(email);
-    }
+  @Query(() => CreateUserResponse)
+  async userByEmail(@Args('email', { type: () => String }) email: string) {
+    return await this.userService.findUserByEmail(email);
+  }
 }
