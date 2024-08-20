@@ -71,7 +71,7 @@ export class JwtAuthGuard extends AuthGuard('jwt') implements CanActivate {
         });
       }
 
-      request.user = foundUser;
+      request.user = foundUser?.data;
 
       return true;
     } catch (error) {
