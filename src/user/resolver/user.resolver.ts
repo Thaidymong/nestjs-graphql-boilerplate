@@ -2,6 +2,7 @@ import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { UserService } from '../user.service';
 import { AllUserResponse, CreateUserResponse } from '../dto/response';
 import { CreateUserDto } from '../dto/input';
+import { Public } from 'src/auth/decorators';
 
 @Resolver()
 export class UserResolver {
@@ -9,6 +10,7 @@ export class UserResolver {
         private readonly userService: UserService,
     ) { }
 
+    @Public()
     @Mutation(() => CreateUserResponse)
     async create(@Args('input') input: CreateUserDto): Promise<CreateUserResponse> {
         return await this.userService.create(input);
