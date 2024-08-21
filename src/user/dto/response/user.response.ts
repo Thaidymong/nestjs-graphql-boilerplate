@@ -1,4 +1,4 @@
-import { Field, ObjectType } from '@nestjs/graphql';
+import { Field, ObjectType, PickType } from '@nestjs/graphql';
 
 @ObjectType()
 export class UserResponse {
@@ -26,6 +26,12 @@ export class AllUserResponse {
 
 @ObjectType()
 export class CreateUserResponse {
+  @Field(() => UserResponse, { nullable: true })
+  data: UserResponse;
+}
+
+@ObjectType()
+export class UpdateUserResponse {
   @Field(() => UserResponse, { nullable: true })
   data: UserResponse;
 }

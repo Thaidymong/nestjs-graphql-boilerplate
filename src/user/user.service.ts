@@ -1,12 +1,14 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { CreateUserDto } from './dto/input';
+import { CreateUserDto, UpdateUserDto } from './dto/input';
 import * as bcrypt from 'bcrypt';
 import {
   AllUserResponse,
   CreateUserResponse,
+  UpdateUserResponse,
 } from './dto/response/user.response';
 import { UserRepository } from './repositoties/user.repositoty';
 import { GraphQLError } from 'graphql';
+import { ERROR_MESSAGES, ERRORSTATUSCODE } from 'src/errors';
 
 @Injectable()
 export class UserService {
@@ -77,6 +79,35 @@ export class UserService {
         throw new GraphQLError('Internal server error', {
           extensions: {
             code: 'INTERNAL_SERVER_ERROR',
+          },
+        });
+      }
+    }
+  }
+
+  async updateUser(id: string, input: UpdateUserDto): Promise<UpdateUserResponse> {
+    try {
+      const foundUser = await this.userRepository.findOneBy({ id });
+      if (!foundUser) {
+        throw new GraphQLError(ERROR_MESSAGES.NOT_FOUND, {
+          extensions: {
+            code: ERRORSTATUSCODE.NOT_FOUND,
+          },
+        });
+      }
+
+      const updateInput = { ...foundUser, ...input };
+
+      return {
+        data: await this.userRepository.save(updateInput),
+      };
+    } catch (error) {
+      if (error instanceof GraphQLError) {
+        throw error;
+      } else {
+        throw new GraphQLError(ERROR_MESSAGES.BAD_REQUEST, {
+          extensions: {
+            code: ERRORSTATUSCODE.BAD_REQUEST,
           },
         });
       }
