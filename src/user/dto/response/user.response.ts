@@ -35,3 +35,9 @@ export class UpdateUserResponse {
   @Field(() => UserResponse, { nullable: true })
   data: UserResponse;
 }
+
+@ObjectType()
+export class ChangePasswordResponse {
+  @Field(() => UserResponse, { nullable: true })
+  data: UserResponse;
+}

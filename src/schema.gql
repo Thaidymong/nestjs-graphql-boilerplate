@@ -22,6 +22,10 @@ type UpdateUserResponse {
   data: UserResponse
 }
 
+type ChangePasswordResponse {
+  data: UserResponse
+}
+
 type LoginResponse {
   accessToken: String
   refreshToken: String
@@ -42,6 +46,7 @@ type Query {
 type Mutation {
   create(input: CreateUserDto!): CreateUserResponse!
   updateUserProfile(id: String!, input: UpdateUserDto!): UpdateUserResponse!
+  changePassword(input: ChangePasswordDto!): ChangePasswordResponse!
   login(input: LoginDto!): LoginResponse!
   refreshToken(input: RefreshTokenDto!): RefreshTokenResponse!
 }
@@ -56,6 +61,11 @@ input CreateUserDto {
 input UpdateUserDto {
   first_name: String!
   last_name: String!
+}
+
+input ChangePasswordDto {
+  currentPassword: String!
+  password: String!
 }
 
 input LoginDto {
